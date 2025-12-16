@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.bpi.module6.model.Category;
 import com.bpi.module6.model.Product;
+import com.bpi.module6.model.ProductInventory;
+import com.bpi.module6.model.Tag;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
@@ -22,15 +24,6 @@ public class App {
     		
     		runBasicPersist(em);
     		
-//    		runJpqlJoin(em);
-    		
-//    		runJpqlPositionalParameters(em);
-    		
-//    		runJpqlWhereAndNamedParameters(em);
-
-//    		runBasicJpql(em);
-
-//    		runJpqlSelectingSpecificFields(em);
     		
     	} finally {
     		em.close();
@@ -38,7 +31,6 @@ public class App {
     	}
     	
     }
-    
     
     public static void runJpqlJoin(EntityManager em) {
 		//transaction #3 - Selecting Specific Fields
@@ -110,6 +102,10 @@ public class App {
 		//transaction# 1 - persist
 		em.getTransaction().begin(); // begin transaction
 		
+		Tag gaming = new Tag();
+		gaming.setName("gaming");
+		em.persist(gaming);
+		
 		Category peripheral = new Category();
 		peripheral.setName("Peripherals");
 		em.persist(peripheral);
@@ -119,7 +115,14 @@ public class App {
 		keyboard.setPrice(new BigDecimal("3000.00"));
 		keyboard.setBrand("Logitech");
 		keyboard.setCategory(peripheral);
+		keyboard.addTag(gaming);
 		em.persist(keyboard);
+		
+		ProductInventory productInventory = new ProductInventory();
+		productInventory.setQuantity(5);
+		productInventory.setWarehouseLocation("Pasig Warehouse");
+		productInventory.setProduct(keyboard);
+		em.persist(productInventory);
 		
 		Product keyboard2 = new Product();
 		keyboard2.setName("G502");

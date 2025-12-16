@@ -14,9 +14,12 @@
 		<!-- Entity classes (optional, can be auto-scanned) -->
 		<class>com.bpi.module6.model.Product</class>
 		<class>com.bpi.module6.model.Category</class>
+		<class>com.bpi.module6.model.ProductInventory</class>
+		<class>com.bpi.module6.model.Tag</class>
+		
 		
 		<!-- If false, Include all entity classes automatically -->
-<!-- 		<exclude-unlisted-classes>false</exclude-unlisted-classes> -->
+		<!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
 
 		<properties>
 			<!-- JDBC connection properties -->
