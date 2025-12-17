@@ -7,18 +7,18 @@ import com.bpi.module6.model.Category;
 import com.bpi.module6.model.Product;
 import com.bpi.module6.model.ProductInventory;
 import com.bpi.module6.model.Tag;
+import com.bpi.module6.util.EntityManagerUtil;
 
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 
 
 public class App {
+	
     public static void main(String[] args) {
     	
-    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("default_unit");
-    	EntityManager em = emf.createEntityManager();
+    	EntityManager em = EntityManagerUtil.createEntityManager();
+
     	
     	try {
     		
@@ -26,8 +26,9 @@ public class App {
     		
     		
     	} finally {
-    		em.close();
-    		emf.close();
+    		
+    		EntityManagerUtil.closeEntityManager(em);
+    		EntityManagerUtil.shutdownFactory();
     	}
     	
     }
@@ -109,6 +110,9 @@ public class App {
 		Category peripheral = new Category();
 		peripheral.setName("Peripherals");
 		em.persist(peripheral);
+		
+		Product product = new Product();
+		em.persist(product);
 		
 		Product keyboard = new Product();
 		keyboard.setName("G915 Mechanical Keyboard");
