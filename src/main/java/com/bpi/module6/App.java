@@ -1,25 +1,22 @@
 package com.bpi.module6;
 
+import com.bpi.module6.util.EntityManagerUtil;
+
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
 
 
 public class App {
+	
     public static void main(String[] args) {
     	
-    	EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
-    	EntityManager em = emf.createEntityManager();
+    	EntityManager em = EntityManagerUtil.createEntityManager();
     	
     	try {
+
     		
-    		em.getTransaction().begin();
-    		
-    		
-    		em.getTransaction().commit();
     	} finally {
-    		em.close();
-    		emf.close();
+    		EntityManagerUtil.closeEntityManager(em);
+    		EntityManagerUtil.shutdownFactory();
     	}
     	
     }
