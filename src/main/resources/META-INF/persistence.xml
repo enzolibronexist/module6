@@ -11,10 +11,10 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         
         <!-- Entity classes (optional, can be auto-scanned) -->
-        <!-- <class>com.example.MyEntity</class> -->
+        <class>com.bpi.module6.model.Product</class>
         
 		<!-- If false, Include all entity classes automatically -->
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+<!--         <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
 
         <properties>
             <!-- JDBC connection properties -->
@@ -28,6 +28,7 @@
             <property name="hibernate.hbm2ddl.auto" value="none"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
+                        
         </properties>
     </persistence-unit>
 </persistence>
