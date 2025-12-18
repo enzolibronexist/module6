@@ -34,12 +34,6 @@ public class Product {
 	@Column
 	private String brand;
 	
-	@ManyToOne
-	private Category category;
-	
-    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
-    private ProductInventory inventory;
-    
     @ManyToMany
     @JoinTable(
         name = "product_tag",
@@ -47,6 +41,15 @@ public class Product {
         inverseJoinColumns = @JoinColumn(name = "tag_id")
     )
     private Set<Tag> tags = new HashSet<>();
+	
+	@ManyToOne
+	@JoinColumn(name = "category_id")
+	private Category category;
+	
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "product")
+    private ProductInventory inventory;
+    
+
 	
 	public Long getId() {
 		return id;

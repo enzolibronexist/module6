@@ -24,6 +24,24 @@ public class App {
     		
     		runBasicPersist(em);
     		
+    		//transaction #3 - Selecting Specific Fields
+    		em.getTransaction().begin(); //begin transaction
+    		
+    		TypedQuery<Category> query = em.createQuery("SELECT c FROM Category c WHERE c.name = :name",
+    				Category.class);
+    		
+    		query.setParameter("name", "Peripherals");
+
+    		Category category = query.getSingleResult();
+    		
+    		System.out.println(category.toString());
+
+    		System.out.println(category.getProducts());
+    		
+    		category.getProducts().forEach(product -> System.out.println(product.getName()));
+
+    		em.getTransaction().commit(); // commit transaction
+    		
     		
     	} finally {
     		
@@ -109,7 +127,6 @@ public class App {
 		
 		Category peripheral = new Category();
 		peripheral.setName("Peripherals");
-		em.persist(peripheral);
 		
 		Product product = new Product();
 		em.persist(product);
@@ -119,6 +136,7 @@ public class App {
 		keyboard.setPrice(new BigDecimal("3000.00"));
 		keyboard.setBrand("Logitech");
 		keyboard.setCategory(peripheral);
+		peripheral.getProducts().add(keyboard);
 		keyboard.addTag(gaming);
 		em.persist(keyboard);
 		
@@ -133,6 +151,7 @@ public class App {
 		keyboard2.setPrice(new BigDecimal("5000.00"));
 		keyboard2.setBrand("Logitech");
 		keyboard2.setCategory(peripheral);
+		peripheral.getProducts().add(keyboard2);
 		em.persist(keyboard2);
 
 		Product mouse = new Product();
@@ -140,6 +159,7 @@ public class App {
 		mouse.setPrice(new BigDecimal("6000.00"));
 		mouse.setBrand("Pulsar");
 		mouse.setCategory(peripheral);
+		peripheral.getProducts().add(mouse);
 		em.persist(mouse);
 		
 		Product monitor = new Product();
@@ -147,7 +167,10 @@ public class App {
 		monitor.setPrice(new BigDecimal("8000.00"));
 		monitor.setBrand("Zowie");
 		monitor.setCategory(peripheral);
+		peripheral.getProducts().add(monitor);
 		em.persist(monitor);
+		
+		em.persist(peripheral);
 		
 		em.getTransaction().commit(); // commit transaction
     }

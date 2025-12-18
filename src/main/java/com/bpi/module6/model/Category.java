@@ -1,9 +1,11 @@
 package com.bpi.module6.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -21,8 +23,8 @@ public class Category {
 	@Column(nullable = false, unique = true)
 	private String name;
 	
-	@OneToMany(mappedBy = "category")
-	private List<Product> product;
+	@OneToMany(mappedBy = "category", fetch = FetchType.EAGER)
+	private List<Product> products = new ArrayList<>();
 
 	public Long getId() {
 		return id;
@@ -40,12 +42,12 @@ public class Category {
 		this.name = name;
 	}
 
-	public List<Product> getProduct() {
-		return product;
+	public List<Product> getProducts() {
+		return products;
 	}
 
-	public void setProduct(List<Product> product) {
-		this.product = product;
+	public void setProducts(List<Product> products) {
+		this.products = products;
 	}
 
 	@Override
