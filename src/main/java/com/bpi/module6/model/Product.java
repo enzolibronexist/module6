@@ -16,11 +16,16 @@ import jakarta.persistence.Table;
 @Table(name = "products")
 public class Product {
 	
+//	@Id
+//	@Column(name = "product_id")
+//	@GeneratedValue(strategy = GenerationType.UUID)
+//	@UuidGenerator	
+//	private UUID id;
+	
 	@Id
 	@Column(name = "product_id")
-	@GeneratedValue(strategy = GenerationType.UUID)
-	@UuidGenerator	
-	private UUID id;
+	@GeneratedValue
+	private Long id;
 	
 	@Column(name = "product_name", nullable = false, unique = true, columnDefinition = "VARCHAR(100)")
 	private String productName;
@@ -28,11 +33,11 @@ public class Product {
 	@Column(name = "product_price", precision = 10, scale = 2, nullable = false)
 	private BigDecimal price;
 
-	public UUID getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(UUID id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
