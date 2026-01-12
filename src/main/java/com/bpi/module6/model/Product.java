@@ -16,11 +16,18 @@ import jakarta.persistence.Table;
 @Table(name = "products")
 public class Product {
 	
+//  prior hibernate 6.5+
 //	@Id
 //	@Column(name = "product_id")
 //	@GeneratedValue(strategy = GenerationType.UUID)
 //	@UuidGenerator	
 //	private UUID id;
+	
+//    for Hibernate 6.5+
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.UUID)
+//    @Column(name = "product_id", updatable = false, nullable = false)
+//    private UUID id;
 	
 	@Id
 	@Column(name = "product_id")
