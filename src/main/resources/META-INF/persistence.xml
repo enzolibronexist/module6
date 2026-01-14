@@ -13,6 +13,7 @@
 
 		<!-- Entity classes (optional, can be auto-scanned) -->
 		<class>com.bpi.module6.model.Product</class>
+		<class>com.bpi.module6.model.ProductInventory</class>
 		<class>com.bpi.module6.model.Category</class>
 		
 		
