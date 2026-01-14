@@ -2,6 +2,7 @@ package com.bpi.module6;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.UUID;
 
 import com.bpi.module6.model.Category;
 import com.bpi.module6.model.Product;
@@ -20,7 +21,7 @@ public class App {
 		try {
 
 //			runFetchingSample(em);
-			
+
 			runCascadingSample(em);
 
 		} finally {
@@ -80,43 +81,112 @@ public class App {
 		 * transaction # 1 - cascade persist
 		 */
 		em.getTransaction().begin();
-		
+
 		Product macbookPro = new Product();
 		macbookPro.setBrand("Apple");
 		macbookPro.setName("Macbook Pro M4");
 		macbookPro.setPrice(new BigDecimal("100000.00"));
-		
+
 		ProductInventory macbookProInventory = new ProductInventory();
 		macbookProInventory.setProduct(macbookPro);
 		macbookProInventory.setQuantity(20);
 		macbookProInventory.setWarehouseLocation("Ortigas");
-		
+
 		em.persist(macbookProInventory);
-		
+
 		em.getTransaction().commit();
-		
-		
+
 		/*
 		 * transaction # 2 - cascade merge
 		 */
-		em.getTransaction().begin();
-		
-		em.clear(); // clear persistence context
-		
-		System.out.println(String.format("Is macbookProInventory inside the persistence context: %b", em.contains(macbookProInventory)));
-		System.out.println(String.format("Is macbookPro inside the persistence context: %b", em.contains(macbookPro)));
+//		em.getTransaction().begin();
+//		
+//		em.clear(); // clear persistence context
+//		
+//		System.out.println(String.format("Is macbookProInventory inside the persistence context: %b", em.contains(macbookProInventory)));
+//		System.out.println(String.format("Is macbookPro inside the persistence context: %b", em.contains(macbookPro)));
+//
+//		// since we include cascade type merge, macbookPro, which is a related entity of mackbookProInventory should also be merged
+//		macbookProInventory = em.merge(macbookProInventory);
+//		macbookPro = macbookProInventory.getProduct();
+//		
+//		System.out.println("after merging");
+//		System.out.println(String.format("Is macbookProInventory inside the persistence context: %b", em.contains(macbookProInventory)));
+//		System.out.println(String.format("Is macbookPro inside the persistence context: %b", em.contains(macbookPro)));
+//		
+//		em.getTransaction().commit();
 
-		// since we include cascade type merge, macbookPro, which is a related entity of mackbookProInventory should also be merged
-		macbookProInventory = em.merge(macbookProInventory);
-		macbookPro = macbookProInventory.getProduct();
+		/*
+		 * transaction # 3 - cascade remove
+		 */
+//		em.getTransaction().begin();
+//		
+//		em.clear();
+//		
+//		ProductInventory macbookProInventoryCopy = em.find(ProductInventory.class, macbookProInventory.getId());
+//		
+//		System.out.println(String.format("Is macbookProInventoryCopy inside the persistence context: %b", em.contains(macbookProInventoryCopy)));
+//		
+//		em.remove(macbookProInventoryCopy);
+//		
+//		em.getTransaction().commit();
+
+		/*
+		 * transaction # 4 - cascade refresh
+		 */
+//		em.getTransaction().begin();
+//
+//		em.clear();
+//
+//		ProductInventory macbookProInventoryCopy = em.find(ProductInventory.class, macbookProInventory.getId());
+//
+//		runUpdateProductUpdatedByOtherTransaction(macbookProInventoryCopy.getId());
+//
+//		System.out.println("Before Refresh: ");
+//		System.out.println(macbookProInventoryCopy.getProduct().getName());
+//
+//		em.refresh(macbookProInventoryCopy);
+//
+//		System.out.println("After Refresh: ");
+//		System.out.println(macbookProInventoryCopy.getProduct().getName());
+//
+//		em.getTransaction().commit();
 		
-		System.out.println("after merging");
-		System.out.println(String.format("Is macbookProInventory inside the persistence context: %b", em.contains(macbookProInventory)));
-		System.out.println(String.format("Is macbookPro inside the persistence context: %b", em.contains(macbookPro)));
-		
-		em.getTransaction().commit();
-		
-		
-		
+		/*
+		 * transaction # 4 - cascade detach
+		 */
+//		em.getTransaction().begin();
+//
+//		System.out.println(String.format("Is macbookProInventory inside the persistence context: %b", em.contains(macbookProInventory)));
+//
+//		em.detach(macbookProInventory);
+//
+//		System.out.println("After Detach: ");
+//		System.out.println(String.format("Is macbookPro inside the persistence context: %b", em.contains(macbookPro)));
+//
+//		em.getTransaction().commit();
+
+	}
+
+	public static void runUpdateProductUpdatedByOtherTransaction(UUID productInventoryId) {
+
+		EntityManager em = EntityManagerUtil.createEntityManager();
+
+		try {
+
+			em.getTransaction().begin();
+
+			ProductInventory macbookProInventoryCopy = em.find(ProductInventory.class, productInventoryId);
+
+			Product product = macbookProInventoryCopy.getProduct();
+			product.setName("Macbook Pro M5");
+
+			em.getTransaction().commit();
+
+		} finally {
+
+			EntityManagerUtil.closeEntityManager(em);
+		}
+
 	}
 }

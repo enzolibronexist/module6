@@ -23,7 +23,7 @@ public class ProductInventory {
 	
 	private String warehouseLocation;
 	
-	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE, CascadeType.REFRESH, CascadeType.DETACH})
 	@JoinColumn(name = "product_id")
 	private Product product;
 
