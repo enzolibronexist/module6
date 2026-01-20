@@ -1,6 +1,7 @@
 package com.bpi.module6.model;
 
 import java.math.BigDecimal;
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import org.hibernate.annotations.UuidGenerator;
@@ -39,6 +40,7 @@ public class Product {
 	
 	@Column(name = "product_price", precision = 10, scale = 2, nullable = false)
 	private BigDecimal price;
+	
 
 	public Long getId() {
 		return id;
@@ -63,6 +65,7 @@ public class Product {
 	public void setPrice(BigDecimal price) {
 		this.price = price;
 	}
+	
 
 	@Override
 	public String toString() {

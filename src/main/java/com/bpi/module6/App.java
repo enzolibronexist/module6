@@ -12,6 +12,7 @@ public class App {
 	public static void main(String[] args) {
 
 		runFindExisitingSample();
+
 	}
 
 	public static void runFindExisitingSample() {
@@ -33,6 +34,8 @@ public class App {
 			em.getTransaction().commit();
 
 			Long newProductId = newProduct.getId(); // get product id of persisted product
+			
+			em.clear();
 
 			/*
 			 * transaction # 2
@@ -45,7 +48,11 @@ public class App {
 
 			em.getTransaction().commit();
 
-			System.out.println("PRODUCT IS: " + product.toString());
+			if(product != null) {
+				System.out.println("PRODUCT: " + product.toString());
+			} else {
+				System.out.println("Product is null");
+			}
 
 		} finally {
 			EntityManagerUtil.closeEntityManager(em);
@@ -82,7 +89,7 @@ public class App {
 
 			/*
 			 * start of transaction # 1
-			 */ 
+			 */
 			em.getTransaction().begin();
 
 			Product newProduct = new Product();
@@ -91,25 +98,53 @@ public class App {
 
 			em.persist(newProduct);
 
-			// after commit newProduct will be in a detached state, meaning it is not
-			// residing in the persistence context anymore
 			em.getTransaction().commit();
-			/* end of transaction # 1 */
 
-			/* start of transaction # 2 */
+			em.clear();
+
+			/*
+			 * start of transaction # 2
+			 */ 
 			em.getTransaction().begin();
 
-			em.merge(newProduct); // use merge to re-attach newProduct to the context
+			newProduct = em.merge(newProduct); // use merge to re-attach newProduct to the context
 
 			newProduct.setPrice(new BigDecimal("4000.00"));
 
 			em.getTransaction().commit();
-			/* end of transaction # 2 */
 
 		} finally {
 			EntityManagerUtil.closeEntityManager(em);
 			EntityManagerUtil.shutdownFactory();
 		}
 
+	}
+	
+	public static void runRefreshSample() {
+		EntityManager em = EntityManagerUtil.createEntityManager();
+
+		try {
+
+			/*
+			 * start of transaction # 1
+			 */
+			em.getTransaction().begin();
+
+			Product newProduct = new Product();
+			newProduct.setProductName("keyboard");
+			newProduct.setPrice(new BigDecimal("3000.20"));
+
+			em.persist(newProduct);
+
+			em.getTransaction().commit();
+			
+			em.refresh(newProduct);
+
+			em.clear();
+
+		} finally {
+			EntityManagerUtil.closeEntityManager(em);
+			EntityManagerUtil.shutdownFactory();
+		}
 	}
 }
