@@ -20,9 +20,9 @@ public class App {
 
 		try {
 
-//			runFetchingSample(em);
+			runFetchingSample(em);
 
-			runCascadingSample(em);
+//			runCascadingSample(em);
 
 		} finally {
 
@@ -37,6 +37,7 @@ public class App {
 		/*
 		 * transaction #1 - save sample data
 		 */
+		System.out.println("begin transaction #1");
 		em.getTransaction().begin();
 
 		Category workCategory = new Category();
@@ -55,15 +56,15 @@ public class App {
 		em.getTransaction().commit();
 
 		Long macbookProId = macbookPro.getId();
+		
+		em.clear(); // clear persistence context
 
 		/*
 		 * transaction #2 - get sample data
 		 */
+		System.out.println("begin transaction #2");
 		em.getTransaction().begin();
 
-		em.clear(); // clear persistence context
-
-		System.out.println("is macbookPro inside context: " + em.contains(macbookPro));
 
 		Product macbookProFromDatabase = em.find(Product.class, macbookProId);
 
