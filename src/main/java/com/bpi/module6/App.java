@@ -11,7 +11,9 @@ public class App {
 
 	public static void main(String[] args) {
 
-		runFindExisitingSample();
+//		runFindExisitingSample();
+		
+		runRefreshSample();
 
 	}
 
@@ -138,7 +140,11 @@ public class App {
 
 			em.getTransaction().commit();
 			
+			System.out.println("timestamp before refresh: " + newProduct.getCreatedAt());
+			
 			em.refresh(newProduct);
+			
+			System.out.println("timestamp after refresh: " + newProduct.getCreatedAt());
 
 			em.clear();
 

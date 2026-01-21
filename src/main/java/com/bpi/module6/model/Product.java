@@ -1,6 +1,7 @@
 package com.bpi.module6.model;
 
 import java.math.BigDecimal;
+import java.time.Instant;
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
@@ -41,6 +42,8 @@ public class Product {
 	@Column(name = "product_price", precision = 10, scale = 2, nullable = false)
 	private BigDecimal price;
 	
+    @Column(name = "created_at", insertable = false, updatable = false)
+    private Instant createdAt;
 
 	public Long getId() {
 		return id;
@@ -66,6 +69,10 @@ public class Product {
 		this.price = price;
 	}
 	
+
+	public Instant getCreatedAt() {
+		return createdAt;
+	}
 
 	@Override
 	public String toString() {
