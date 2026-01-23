@@ -14,7 +14,7 @@
         <!-- <class>com.example.MyEntity</class> -->
         
 		<!-- If false, Include all entity classes automatically -->
-        <exclude-unlisted-classes>false</exclude-unlisted-classes>
+        <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
 
         <properties>
             <!-- JDBC connection properties -->
@@ -24,7 +24,7 @@
             <property name="jakarta.persistence.jdbc.password" value="password"/>
 
             <!-- Hibernate properties -->
-            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <!-- <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/> -->
             <property name="hibernate.hbm2ddl.auto" value="none"/>
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.format_sql" value="true"/>
