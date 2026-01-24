@@ -13,17 +13,17 @@ public class App {
 	    
 	    static void testConnection() {
 
-	    	EntityManager em = EntityManagerUtil.createEntityManager();
+	    	EntityManager em = EntityManagerUtil.getInstance().createEntityManager();
 	    	
 	    	try {
 	    		
 	    		if(em.isOpen()) {
-	    			System.out.println("entity manager is open, ready to create transaction");
+	    			System.out.println("entity manager open, ready to create transaction");
 	    		}
 	    		
 	    	} finally {
-	    		EntityManagerUtil.closeEntityManager(em);
-	    		EntityManagerUtil.shutdownFactory();
+	    		EntityManagerUtil.getInstance().closeEntityManager(em);
+	    		EntityManagerUtil.getInstance().shutdownFactory();
 	    	}
 	    }
 
