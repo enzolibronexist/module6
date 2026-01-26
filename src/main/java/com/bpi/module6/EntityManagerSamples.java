@@ -22,5 +22,19 @@ public class EntityManagerSamples {
 		System.out.println("is newStudent inside the persistence context: " + em.contains(newStudent));
 
 	}
+	
+	static void findSample(EntityManager em) {
+		
+		em.getTransaction().begin();
+		
+		//Hibernate retrieves the Student entity via SELECT and places it into the persistence context.
+		Student studentWithId1 = em.find(Student.class, 1L); //managed entity
+		
+		if (studentWithId1 != null) {
+			System.out.println("is newStudent inside the persistence context: " + em.contains(studentWithId1));
+		}
+		
+		em.getTransaction().commit();
+	}
 
 }

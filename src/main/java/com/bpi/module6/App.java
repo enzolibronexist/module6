@@ -17,7 +17,7 @@ public class App {
 		EntityManager em = EntityManagerUtil.getInstance().createEntityManager();
 
 		try {
-			EntityManagerSamples.persistSample(em);
+			EntityManagerSamples.findSample(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);
