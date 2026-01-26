@@ -37,7 +37,6 @@ public class EntityManagerSamples {
 		em.getTransaction().commit();
 	}
 	
-	
 	static void mergeSample(EntityManager em) {
 		
 		em.getTransaction().begin();
@@ -59,6 +58,21 @@ public class EntityManagerSamples {
 		studentWithId1 = em.merge(studentWithId1);
 
 		em.getTransaction().commit();
+	}
+	
+	static void removeSample(EntityManager em) {
+		em.getTransaction().begin();
+		
+		Student student = em.find(Student.class, 8L); // managed
+		
+		em.remove(student);
+		
+		em.getTransaction().commit();
+		
+		System.out.println("is newStudent inside the persistence context: " + em.contains(student)); // false
+		
+		System.out.println(student.toString()); //detached
+		
 	}
 
 }

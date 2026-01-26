@@ -17,7 +17,8 @@ public class App {
 		EntityManager em = EntityManagerUtil.getInstance().createEntityManager();
 
 		try {
-			EntityManagerSamples.mergeSample(em);
+			
+			EntityManagerSamples.removeSample(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);
