@@ -17,12 +17,10 @@ public class EntityManagerSamples {
 		
 		em.persist(newStudent); // managed
 		
-		
-		em.getTransaction().commit();
+		em.getTransaction().commit(); //hibernate generates sql, newStudent will be saved to db
 		
 		System.out.println("is newStudent inside the persistence context: " + em.contains(newStudent));
 
-	
 	}
 
 }
