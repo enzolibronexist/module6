@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -31,6 +32,17 @@ public class Student {
 	@OneToMany(mappedBy = "student")
 	private List<Course> courses;
 	
+	@ManyToMany(mappedBy = "students")
+	private List<Club> clubs;
+	
+	public List<Club> getClubs() {
+		return clubs;
+	}
+
+	public void setClubs(List<Club> clubs) {
+		this.clubs = clubs;
+	}
+
 	public Long getId() {
 		return id;
 	}

@@ -14,7 +14,7 @@
         <class>com.bpi.module6.model.Student</class>
         <class>com.bpi.module6.model.Profile</class>
         <class>com.bpi.module6.model.Course</class>
-        
+        <class>com.bpi.module6.model.Club</class>
         
 		<!-- If false, Include all entity classes automatically -->
         <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes> -->
