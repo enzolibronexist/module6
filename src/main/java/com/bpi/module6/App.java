@@ -18,7 +18,7 @@ public class App {
 
 		try {
 			
-			EntityManagerSamples.rollbackSample(em);
+			CascadingSampleTransaction.persistCascade(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);

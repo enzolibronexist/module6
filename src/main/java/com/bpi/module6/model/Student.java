@@ -3,6 +3,7 @@ package com.bpi.module6.model;
 import java.time.Instant;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 @Entity
@@ -33,14 +35,25 @@ public class Student {
 	@Column(name = "created_at", insertable = false, updatable = false)
     private Instant createdAt;
 	
-	@OneToMany(mappedBy = "student")
+	@OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST)
 	private List<Course> courses;
 	
 	@ManyToMany(mappedBy = "students")
 	private List<Club> clubs;
 	
+	@OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST)
+	private Profile profile;
+	
 	public List<Club> getClubs() {
 		return clubs;
+	}
+
+	public Profile getProfile() {
+		return profile;
+	}
+
+	public void setProfile(Profile profile) {
+		this.profile = profile;
 	}
 
 	public void setClubs(List<Club> clubs) {
