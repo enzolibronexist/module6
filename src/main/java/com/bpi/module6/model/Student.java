@@ -1,5 +1,6 @@
 package com.bpi.module6.model;
 
+import java.time.Instant;
 import java.util.List;
 
 import jakarta.persistence.Column;
@@ -28,6 +29,9 @@ public class Student {
 
 	@Column(name = "email", unique = true, length = 100, columnDefinition = "VARCHAR(100)")
 	private String email;
+	
+	@Column(name = "created_at", insertable = false, updatable = false)
+    private Instant createdAt;
 	
 	@OneToMany(mappedBy = "student")
 	private List<Course> courses;
@@ -85,7 +89,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", email=" + email + "]";
+		return "Student [id=" + id + ", name=" + name + ", age=" + age + ", email=" + email + ", createdAt=" + createdAt + "]";
 	}
 
 }

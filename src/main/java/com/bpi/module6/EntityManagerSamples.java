@@ -74,5 +74,28 @@ public class EntityManagerSamples {
 		System.out.println(student.toString()); //detached
 		
 	}
+	
+	static void refreshSample(EntityManager em) {
+		
+		em.getTransaction().begin();
+		
+		Student newStudent = new Student();
+		
+		newStudent.setName("John Mark Santos");
+		newStudent.setAge(21);
+		newStudent.setEmail("johnmarksantos@gmail.com");
+		
+		em.persist(newStudent); // managed 
+		
+		em.getTransaction().commit(); // commit insert to database
+		
+		System.out.println("BEFORE REFRESH: " + newStudent.toString());
+		
+		em.refresh(newStudent);
+		
+		System.out.println("AFTER REFRESH: " + newStudent.toString());
+		
+		
+	}
 
 }

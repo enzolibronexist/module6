@@ -18,7 +18,7 @@ public class App {
 
 		try {
 			
-			EntityManagerSamples.removeSample(em);
+			EntityManagerSamples.refreshSample(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);
