@@ -36,5 +36,29 @@ public class EntityManagerSamples {
 		
 		em.getTransaction().commit();
 	}
+	
+	
+	static void mergeSample(EntityManager em) {
+		
+		em.getTransaction().begin();
+		
+		//Hibernate retrieves the Student entity via SELECT and places it into the persistence context.
+		Student studentWithId1 = em.find(Student.class, 1L); //managed entity
+		
+		em.detach(studentWithId1); //detach studentWithId1
+		
+		System.out.println("is newStudent inside the persistence context: " + em.contains(studentWithId1)); // false
+		
+		// for example, studentWithId1 has changes while in detached
+		studentWithId1.setAge(22);
+		
+		// in order for this changes to reflect in database
+		// we need to re attach to the persistence context using merge
+		// merge() returns a managed instance with the same persistent state 
+		// as the given entity instance, but a distinct Java object identity.
+		studentWithId1 = em.merge(studentWithId1);
+
+		em.getTransaction().commit();
+	}
 
 }
