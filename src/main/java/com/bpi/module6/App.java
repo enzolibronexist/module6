@@ -18,7 +18,7 @@ public class App {
 
 		try {
 			
-			CascadingSampleTransaction.persistCascade(em);
+			JpqlSample.selectAllStudentEmails(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);

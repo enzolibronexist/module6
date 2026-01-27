@@ -6,6 +6,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -41,7 +42,7 @@ public class Student {
 	@ManyToMany(mappedBy = "students")
 	private List<Club> clubs;
 	
-	@OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST)
+	@OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
 	private Profile profile;
 	
 	public List<Club> getClubs() {
