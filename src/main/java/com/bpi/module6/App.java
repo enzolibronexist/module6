@@ -29,8 +29,7 @@ public class App {
 //			List<Course> result3 = JpqlSample.selectAllStudentsAndCoursesRightJoin(em);
 //			System.out.println(result3.size());
 			
-			Long count = JpqlSample.countStudentsWithCourses(em);
-			System.out.println(count);
+			List<Student> students = JpqlSample.selectAllStudentsAndCoursesInnerJoinMultiple(em);
 
 
 		} finally {

@@ -81,6 +81,15 @@ public class JpqlSample {
 		return students;
 	}
 	
+	static List<Student> selectAllStudentsAndCoursesInnerJoinMultiple(EntityManager em) {
+		
+		List<Student> students = em.createQuery("SELECT s FROM Student s JOIN s.courses JOIN s.profile JOIN s.clubs", Student.class)
+				.getResultList();	
+
+		return students;
+	}
+	
+	
 	static List<Student> selectAllStudentsAndCoursesLeftJoin(EntityManager em) {
 		
 		List<Student> students = em.createQuery("SELECT s FROM Student s LEFT JOIN s.courses", Student.class)
