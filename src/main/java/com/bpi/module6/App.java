@@ -21,15 +21,9 @@ public class App {
 			JpaAnnotationSampleTransaction.persistOneToMany(em);
 			
 			em.clear();
-//			List<Student> result1 = JpqlSample.selectAllStudentsAndCoursesInnerJoin(em);
-//			System.out.println(result1.size());
-//			List<Student> result2 = JpqlSample.selectAllStudentsAndCoursesLeftJoin(em);
-//			System.out.println(result2.size());
+			CriteriaSample.selectStudentsWhereAgeGreaterThan21(em);
 			
-//			List<Course> result3 = JpqlSample.selectAllStudentsAndCoursesRightJoin(em);
-//			System.out.println(result3.size());
-			
-			List<Student> students = JpqlSample.selectAllStudentsAndCoursesInnerJoinMultiple(em);
+//			List<Student> students = JpqlSample.selectAllStudentsAndCoursesInnerJoinMultiple(em);
 
 
 		} finally {
