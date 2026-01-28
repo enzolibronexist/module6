@@ -57,8 +57,14 @@ public class JpaAnnotationSampleTransaction {
 		newCourse.setCourseName("Math");
 		newCourse.setGrade("80");
 		newCourse.setStudent(student1);
-		
 		em.persist(newCourse);
+
+		
+		Course newCourse2 = new Course();
+		newCourse2.setCourseName("English");
+		newCourse2.setGrade("75");
+		newCourse2.setStudent(student1);
+		em.persist(newCourse2);
 		
 		em.getTransaction().commit();
 	}

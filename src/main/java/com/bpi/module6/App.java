@@ -17,8 +17,21 @@ public class App {
 		EntityManager em = EntityManagerUtil.getInstance().createEntityManager();
 
 		try {
+			JpaAnnotationSampleTransaction.persistStudents(em);
+			JpaAnnotationSampleTransaction.persistOneToMany(em);
 			
-			JpqlSample.selectAllStudentEmails(em);
+			em.clear();
+//			List<Student> result1 = JpqlSample.selectAllStudentsAndCoursesInnerJoin(em);
+//			System.out.println(result1.size());
+//			List<Student> result2 = JpqlSample.selectAllStudentsAndCoursesLeftJoin(em);
+//			System.out.println(result2.size());
+			
+//			List<Course> result3 = JpqlSample.selectAllStudentsAndCoursesRightJoin(em);
+//			System.out.println(result3.size());
+			
+			Long count = JpqlSample.countStudentsWithCourses(em);
+			System.out.println(count);
+
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);

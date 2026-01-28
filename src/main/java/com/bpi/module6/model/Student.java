@@ -1,6 +1,7 @@
 package com.bpi.module6.model;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.List;
 
 import jakarta.persistence.CascadeType;
@@ -37,7 +38,7 @@ public class Student {
     private Instant createdAt;
 	
 	@OneToMany(mappedBy = "student", cascade = CascadeType.PERSIST)
-	private List<Course> courses;
+	private List<Course> courses = new ArrayList<>();
 	
 	@ManyToMany(mappedBy = "students")
 	private List<Club> clubs;
