@@ -12,9 +12,9 @@ public class EntityManagerSamples {
 		
 		Student newStudent = new Student(); // transient
 		
-		newStudent.setName("Pedro Reyes");
-		newStudent.setAge(23);
-		newStudent.setEmail("pedroreyes@gmail.com"); 
+		newStudent.setName("Gloria Pascual");
+		newStudent.setAge(65);
+		newStudent.setEmail("gloriapascual@gmail.com"); 
 		
 		em.persist(newStudent); // managed
 		

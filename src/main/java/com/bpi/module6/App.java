@@ -17,14 +17,8 @@ public class App {
 		EntityManager em = EntityManagerUtil.getInstance().createEntityManager();
 
 		try {
-			JpaAnnotationSampleTransaction.persistStudents(em);
-			JpaAnnotationSampleTransaction.persistOneToMany(em);
 			
-			em.clear();
-			CriteriaSample.selectStudentsWhereAgeGreaterThan21(em);
-			
-//			List<Student> students = JpqlSample.selectAllStudentsAndCoursesInnerJoinMultiple(em);
-
+			CriteriaSample.selectStudentCourseLeftJoin(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);
