@@ -114,12 +114,7 @@ public class CriteriaSample {
 		TypedQuery<Student> query = em.createQuery(cq);
 		List<Student> result = query.getResultList();
 		
-		result.forEach(student -> {
-			
-			student.getCourses().forEach(studentCourse -> {
-				System.out.println(student.getName() + " : " + studentCourse.getCourseName());
-			});
-		});
+		System.out.println(result.size());
 		
 	}
 
