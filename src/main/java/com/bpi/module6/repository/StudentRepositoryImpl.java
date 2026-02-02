@@ -47,9 +47,4 @@ public class StudentRepositoryImpl implements Repository<Student, Long> {
 		return em.createQuery("SELECT s FROM Student s", Student.class).getResultList();
 	}
 
-	public List<Student> findByLastName(String lastName) {
-		return em.createQuery("SELECT s FROM Student s WHERE s.lastName = :lastName", Student.class)
-				.setParameter("lastName", lastName).getResultList();
-	}
-
 }
