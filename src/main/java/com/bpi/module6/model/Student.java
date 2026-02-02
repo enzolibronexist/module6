@@ -43,7 +43,7 @@ public class Student {
 	@ManyToMany(mappedBy = "students")
 	private List<Club> clubs;
 	
-	@OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST)
 	private Profile profile;
 	
 	public List<Club> getClubs() {

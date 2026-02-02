@@ -18,7 +18,7 @@ public class App {
 
 		try {
 			
-			CriteriaSample.selectStudentCourseLeftJoin(em);
+			CriteriaSample.selectStudentDto(em);
 
 		} finally {
 			EntityManagerUtil.getInstance().closeEntityManager(em);
